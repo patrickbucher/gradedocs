@@ -6,4 +6,4 @@ FONT_PARAMS=-V mainfont="Vollkorn" -V sansfont="Lato" -V monofont="Fira Code"
 	pandoc $(PDF_PARAMS) $(FONT_PARAMS) $< -o $@
 
 clean:
-	rm -f *.pdf
+	rm -f *.pdf *.md
