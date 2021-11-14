@@ -14,8 +14,9 @@ from renderer import render
 @click.command()
 @click.option('--sheet', help='Sheet in Workbook to be processed.')
 @click.option('--outdir', default='.', help='Directory for output.')
+@click.option('--prefix', default='', help='Title prefix for output.')
 @click.argument('workbook', type=click.File('rb'))
-def build_docs(sheet, outdir, workbook):
+def build_docs(sheet, outdir, prefix, workbook):
     wb = load_workbook(workbook)
     ws = wb[sheet] if sheet else wb.active
     if not ws:
@@ -33,7 +34,7 @@ def build_docs(sheet, outdir, workbook):
     for result in results:
         filename = os.path.join(outdir, to_filename(result))
         with open(filename, 'w') as f:
-            f.write(render(ws.title, result, reference))
+            f.write(render(ws.title, result, reference, prefix))
 
 
 def to_filename(result, suffix='md'):

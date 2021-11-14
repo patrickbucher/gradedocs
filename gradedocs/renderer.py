@@ -11,9 +11,10 @@ env = Environment(
 )
 
 
-def render(title, result, ref_result):
+def render(title, result, ref_result, prefix=''):
     template = env.get_template('template-de.md.jinja2')
 
+    title = f'{prefix} {title}' if prefix else title
     first_name = result['first_name']
     last_name = result['last_name']
     class_name = result['class_name']
