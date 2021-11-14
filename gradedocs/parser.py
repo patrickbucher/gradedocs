@@ -20,9 +20,16 @@ def extract_criteria(title_row, from_col):
 
 def extract_result(row, criteria):
     result = {}
-    result['class'] = row[0].value
-    result['first_name'] = row[1].value
-    result['last_name'] = row[2].value
+    result['class'] = str(row[0].value)
+    result['first_name'] = str(row[1].value)
+    result['last_name'] = str(row[2].value)
+    result['scores'] = {}
+    result['misc'] = {}
     for col_index, criterium, in criteria.items():
-        result[criterium] = row[col_index].value
+        value = row[col_index].value
+        try:
+            score = float(value)
+            result['scores'][criterium] = score
+        except:
+            result['misc'][criterium] = value
     return result
