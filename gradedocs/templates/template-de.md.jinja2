@@ -1,0 +1,17 @@
+---
+title: {{ title }}
+author: {{ student }}
+date: {{ today }}
+---
+
+# Punkte
+
+{% for category, (achieved, maximum ) in scores.items() %}
+1. **{{ category }}**: {{ achieved }}/{{ maximum }}
+{% endfor %}
+
+**Total**: {{ total }}/{{ maximumTotal }}
+
+# Note
+
+**{{ grade }}**
