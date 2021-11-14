@@ -3,21 +3,19 @@
 import re
 import sys
 
+import click
 from openpyxl import load_workbook
 
 from parser import parse
 from renderer import render
 
 
-def build_docs():
-    if len(sys.argv) < 2:
-        print(f'usage: {sys.argv[0]}: Grades.xlsx [SheetName]')
-        sys.exit(1)
-    grade_sheet_path = sys.argv[1]
-    grade_sheet_name = sys.argv[2] if len(sys.argv) == 3 else None
-
-    wb = load_workbook(grade_sheet_path)
-    ws = wb[grade_sheet_name] if grade_sheet_name else wb.active
+@click.command()
+@click.option('--sheet', help='Sheet in Workbook to be processed.')
+@click.argument('workbook', type=click.File('rb'))
+def build_docs(sheet, workbook):
+    wb = load_workbook(workbook)
+    ws = wb[sheet] if sheet else wb.active
     if not ws:
         print('unable to open worksheet')
         sys.exit(1)
