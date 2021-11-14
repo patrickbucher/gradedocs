@@ -5,16 +5,17 @@ def parse(ws, first_criteria_col):
 
     reference_row = next(ws_rows)
     reference_result = extract_result(reference_row, criteria)
-    max_points = sum(reference_result['scores'].values())
-    max_grade = compute_grade(reference_result, max_points)
-    reference_result['max_points'] = max_points
+    ref_points, max_grade = compute_grade(reference_result)
+    reference_result['max_points'] = ref_points
+    reference_result['total_points'] = ref_points
     reference_result['grade'] = max_grade
 
     student_results = []
     for row in ws_rows:
         student_result = extract_result(row, criteria)
-        grade = compute_grade(student_result, max_points)
-        student_result['max_points'] = max_points
+        points, grade = compute_grade(student_result, ref_points)
+        student_result['max_points'] = ref_points
+        student_result['total_points'] = points
         student_result['grade'] = grade
         student_results.append(student_result)
 
@@ -25,9 +26,11 @@ def round_to(x, granularity=0.01):
     return round(x * 1/granularity) * granularity
 
 
-def compute_grade(result, max_points):
+def compute_grade(result, max_points=None):
     got_points = sum(result['scores'].values())
-    return round_to(got_points / max_points * 5 + 1)
+    if not max_points:
+        max_points = got_points
+    return got_points, round_to(got_points / max_points * 5 + 1)
 
 
 def extract_result(row, criteria):
