@@ -4,14 +4,18 @@ author: {{ full_name }} ({{ class_name }})
 date: {{ today }}
 ---
 
-# Punkte
+# Punkte und Benotung
 
-{% for category, (achieved, maximum ) in scoring.items() %}
-**{{ category }}**: {{ achieved }}/{{ maximum }}
+| **Bewertungskriterium** | **Erreicht**         | **Maximum**     |
+|-------------------------|---------------------:|----------------:|
+{%- for category, (achieved, maximum ) in scoring.items() %}
+| {{ category }}          | `{{ achieved }}`     | `{{ maximum }}` |
+{%- endfor %}
+| Total                   |   `{{ total }}`      | `{{ maximum }}` |
+| **Note**                | **`{{ grade }}`**    |                 |
+
+# Bemerkungen
+
+{% for category, remark in misc.items() -%}
+- **{{ category }}**: {{ remark }}
 {% endfor %}
-
-**Total**: {{ total }}/{{ maximum }}
-
-# Note
-
-**{{ grade }}**

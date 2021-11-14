@@ -29,6 +29,7 @@ def render(title, result, ref_result):
     total = result['total_points']
     maximum = result['max_points']
     grade = result['grade']
+    misc = result['misc']
 
     return template.render(
         title=title,
@@ -39,4 +40,5 @@ def render(title, result, ref_result):
         total=total,
         maximum=maximum,
         grade=grade,
+        misc=misc,
     )
