@@ -35,9 +35,9 @@ def compute_grade(result, max_points=None):
 
 def extract_result(row, criteria):
     result = {}
-    result['class'] = str(row[0].value)
-    result['first_name'] = str(row[1].value)
-    result['last_name'] = str(row[2].value)
+    result['class_name'] = str(row[0].value)
+    result['last_name'] = str(row[1].value)
+    result['first_name'] = str(row[2].value)
     result['scores'] = {}
     result['misc'] = {}
     for col_index, criterium, in criteria.items():

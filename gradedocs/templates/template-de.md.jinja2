@@ -1,16 +1,16 @@
 ---
 title: {{ title }}
-author: {{ student }}
+author: {{ full_name }} ({{ class_name }})
 date: {{ today }}
 ---
 
 # Punkte
 
-{% for category, (achieved, maximum ) in scores.items() %}
-1. **{{ category }}**: {{ achieved }}/{{ maximum }}
+{% for category, (achieved, maximum ) in scoring.items() %}
+**{{ category }}**: {{ achieved }}/{{ maximum }}
 {% endfor %}
 
-**Total**: {{ total }}/{{ maximumTotal }}
+**Total**: {{ total }}/{{ maximum }}
 
 # Note
 
