@@ -2,5 +2,3 @@
 - category mapping file as a command line flag
     - Excel columns contain short descriptions
     - category mapping file contains yaml mapping to caption
-- gracepoints as a command line flag
-    - subtract this value from max. points to increase grades
