@@ -1,3 +1,7 @@
+MIN_GRADE = 1.0
+MAX_GRADE = 6.0
+
+
 def parse(ws, first_criteria_col, mercy=0):
     ws_rows = iter(ws)
     title_row = next(ws_rows)
@@ -30,7 +34,10 @@ def compute_grade(result, max_points=None):
     got_points = sum(result['scores'].values())
     if not max_points:
         max_points = got_points
-    return got_points, min(round_to(got_points / max_points * 5 + 1), 6)
+    scale = MAX_GRADE - MIN_GRADE
+    grade = round_to(got_points / max_points * scale + MIN_GRADE)
+    grade = min(MAX_GRADE, grade)  # mercy might overshoot
+    return got_points, grade
 
 
 def extract_result(row, criteria):
