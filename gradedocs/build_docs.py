@@ -15,8 +15,9 @@ from renderer import render
 @click.option('--sheet', help='Sheet in Workbook to be processed.')
 @click.option('--outdir', default='.', help='Directory for output.')
 @click.option('--prefix', default='', help='Title prefix for output.')
+@click.option('--mercy', default=0, help='Number of points subtracted from max. points.')
 @click.argument('workbook', type=click.File('rb'))
-def build_docs(sheet, outdir, prefix, workbook):
+def build_docs(sheet, outdir, prefix, mercy, workbook):
     wb = load_workbook(workbook)
     ws = wb[sheet] if sheet else wb.active
     if not ws:
@@ -29,12 +30,12 @@ def build_docs(sheet, outdir, prefix, workbook):
         os.mkdir(outdir)
 
     first_criteria_col = 5
-    reference, results = parse(ws, first_criteria_col)
+    reference, results = parse(ws, first_criteria_col, mercy)
 
     for result in results:
         filename = os.path.join(outdir, to_filename(result))
         with open(filename, 'w') as f:
-            f.write(render(ws.title, result, reference, prefix))
+            f.write(render(ws.title, result, reference, prefix, mercy))
 
 
 def to_filename(result, suffix='md'):

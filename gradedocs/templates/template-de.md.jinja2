@@ -8,10 +8,14 @@ date: "{{ today }}"
 
 | **Bewertungskriterium** | **Erreicht**         | **Maximum**     |
 |-------------------------|---------------------:|----------------:|
-{%- for category, (achieved, maximum ) in scoring.items() %}
-| {{ category }}          | `{{ achieved }}`     | `{{ maximum }}` |
+{%- for category, (achieved, cat_max ) in scoring.items() %}
+| {{ category }}          | `{{ achieved }}`     | `{{ cat_max }}` |
 {%- endfor %}
 | Total                   |   `{{ total }}`      | `{{ maximum }}` |
+{% if mercy -%}
+| Punkteerlass            |                      | `-{{ mercy }}`  |
+| Neues Total             |   `{{ total }}`      | `{{ maximum - mercy }}` |
+{% endif -%}
 | **Note**                | **`{{ grade }}`**    |                 |
 
 # Bemerkungen

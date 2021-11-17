@@ -1,4 +1,4 @@
-def parse(ws, first_criteria_col):
+def parse(ws, first_criteria_col, mercy=0):
     ws_rows = iter(ws)
     title_row = next(ws_rows)
     criteria = extract_criteria(title_row, first_criteria_col)
@@ -13,7 +13,7 @@ def parse(ws, first_criteria_col):
     student_results = []
     for row in ws_rows:
         student_result = extract_result(row, criteria)
-        points, grade = compute_grade(student_result, ref_points)
+        points, grade = compute_grade(student_result, ref_points-mercy)
         student_result['max_points'] = ref_points
         student_result['total_points'] = points
         student_result['grade'] = grade
@@ -30,7 +30,7 @@ def compute_grade(result, max_points=None):
     got_points = sum(result['scores'].values())
     if not max_points:
         max_points = got_points
-    return got_points, round_to(got_points / max_points * 5 + 1)
+    return got_points, min(round_to(got_points / max_points * 5 + 1), 6)
 
 
 def extract_result(row, criteria):

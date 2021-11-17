@@ -1,5 +1,4 @@
 from datetime import datetime
-from re import S
 
 from jinja2 import Environment
 from jinja2 import PackageLoader
@@ -11,7 +10,7 @@ env = Environment(
 )
 
 
-def render(title, result, ref_result, prefix=''):
+def render(title, result, ref_result, prefix='', mercy=0):
     template = env.get_template('template-de.md.jinja2')
 
     title = f'{prefix} {title}' if prefix else title
@@ -40,6 +39,7 @@ def render(title, result, ref_result, prefix=''):
         scoring=scoring,
         total=total,
         maximum=maximum,
+        mercy=mercy,
         grade=grade,
         misc=misc,
     )
