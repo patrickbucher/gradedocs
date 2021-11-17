@@ -9,7 +9,8 @@ date: "{{ today }}"
 | **Bewertungskriterium** | **Erreicht**         | **Maximum**     |
 |-------------------------|---------------------:|----------------:|
 {%- for category, (achieved, cat_max ) in scoring.items() %}
-| {{ category }}          | `{{ achieved }}`     | `{{ cat_max }}` |
+{%- set caption = categories[category] if category in categories else category %}
+| {{ caption }}           | `{{ achieved }}`     | `{{ cat_max }}` |
 {%- endfor %}
 | Total                   |   `{{ total }}`      | `{{ maximum }}` |
 {% if mercy -%}
@@ -21,5 +22,6 @@ date: "{{ today }}"
 # Bemerkungen
 
 {% for category, remark in misc.items() -%}
-- **{{ category }}**: {{ remark }}
+{%- set caption = categories[category] if category in categories else category %}
+- **{{ caption }}**: {{ remark }}
 {% endfor %}

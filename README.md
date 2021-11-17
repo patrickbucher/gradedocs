@@ -13,6 +13,17 @@ line) into a Markdown file:
 
     $ gradedocs/build_docs.py examples/example.xlsx
 
+The scoring criteria can be abbreviated in the Excel sheet for better overview.
+A (partial) criteria mapping YAML file can be defined to replace those by longer
+names:
+
+    $ gradedocs/build_docs.py examples/example.xlsx --catfile examples/categories.yaml
+
+It is possible to reduce the points needed for the maximum grade using the
+`--mercy` flag:
+
+    $ gradedocs/build_docs.py examples/example.xlsx --mercy 5
+
 ### Worksheet Structure
 
 The worksheet must meet the following **column** requirements:

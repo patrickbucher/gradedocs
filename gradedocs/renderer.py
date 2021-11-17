@@ -10,7 +10,7 @@ env = Environment(
 )
 
 
-def render(title, result, ref_result, prefix='', mercy=0):
+def render(title, result, ref_result, prefix='', mercy=0, categories={}):
     template = env.get_template('template-de.md.jinja2')
 
     title = f'{prefix} {title}' if prefix else title
@@ -42,4 +42,5 @@ def render(title, result, ref_result, prefix='', mercy=0):
         mercy=mercy,
         grade=grade,
         misc=misc,
+        categories=categories,
     )

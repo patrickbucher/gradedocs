@@ -5,4 +5,5 @@ Jinja2==3.0.3
 MarkupSafe==2.0.1
 openpyxl==3.0.9
 pycodestyle==2.8.0
+PyYAML==6.0
 toml==0.10.2
