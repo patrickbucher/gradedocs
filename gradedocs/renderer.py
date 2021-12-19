@@ -28,6 +28,7 @@ def render(title, result, ref_result, prefix='', mercy=0, categories={}):
 
     total = result['total_points']
     maximum = result['max_points']
+    max_grade = result['max_grade']
     grade = result['grade']
     misc = result['misc']
 
@@ -41,6 +42,7 @@ def render(title, result, ref_result, prefix='', mercy=0, categories={}):
         maximum=maximum,
         mercy=mercy,
         grade=grade,
+        max_grade=max_grade,
         misc=misc,
         categories=categories,
     )

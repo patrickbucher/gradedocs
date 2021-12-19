@@ -17,11 +17,11 @@ date: "{{ today }}"
 | Punkteerlass            |                      | `-{{ mercy }}`  |
 | Neues Total             |   `{{ total }}`      | `{{ maximum - mercy }}` |
 {% endif -%}
-| **Note**                | **`{{ grade }}`**    |                 |
+| **Note**                | **`{{ "%.2f"|format(grade) }}`** | `{{ max_grade }}` |
 
 # Bemerkungen
 
 {% for category, remark in misc.items() -%}
-{%- set caption = categories[category] if category in categories else category %}
+{%- set caption = categories[category] if category in categories else category -%}
 - **{{ caption }}**: {{ remark }}
 {% endfor %}

@@ -21,6 +21,7 @@ def parse(ws, first_criteria_col, mercy=0):
         student_result['max_points'] = ref_points
         student_result['total_points'] = points
         student_result['grade'] = grade
+        student_result['max_grade'] = reference_result['grade']
         student_results.append(student_result)
 
     return (reference_result, student_results)
@@ -53,7 +54,8 @@ def extract_result(row, criteria):
             score = float(value)
             result['scores'][criterium] = score
         except:
-            result['misc'][criterium] = value
+            if criterium and value:
+                result['misc'][criterium] = value
     return result
 
 
